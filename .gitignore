@@ -59,4 +59,4 @@ target/
 /static
 .idea/
 
-/local_settings.py
+local_settings.py
