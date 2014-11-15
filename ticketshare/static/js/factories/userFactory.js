@@ -1,4 +1,4 @@
-ticket_ang.factory('UserFactory', function($http) {
+ticket.factory('UserFactory', function($http) {
     return {
         createUser: function (data, callback) {
             $http.post('/users/', data)

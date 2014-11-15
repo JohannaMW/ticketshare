@@ -5,19 +5,18 @@
 <head>
     <title></title>
 
-    <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/ticket.routes.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/authentication/authentication.module.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/authentication/services/authentication.service.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/authentication/controllers/register.controller.js' %}"></script>
-
-
     <!-- jQuery -->
 {#    <script src="{% static "js/vendors/jquery.js" %}"></script>#}
     <!------- Angular ------->
     <script src="{% static "js/vendors/angular/angular.js" %}"></script>
     <script src="{% static "js/vendors/angular/angular-resource.js" %}"></script>
     <script src="{% static "js/vendors/angular/angular-route.js" %}"></script>
+
+        <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ticket.routes.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/authentication.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/services/authentication.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/controllers/register.controller.js' %}"></script>
 
 
     <!------- Bootstrap ------->
@@ -74,7 +73,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div ng-app="ticket_ang">
+                <div ng-app="ticket">
                     <div ng-view></div>
                 </div>
             </div>
