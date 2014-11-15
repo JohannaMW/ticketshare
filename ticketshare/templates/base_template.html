@@ -4,6 +4,14 @@
 <html>
 <head>
     <title></title>
+
+    <script type="text/javascript" src="{% static 'js/ticket.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ticket.routes.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/authentication.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/services/authentication.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/authentication/controllers/register.controller.js' %}"></script>
+
+
     <!-- jQuery -->
 {#    <script src="{% static "js/vendors/jquery.js" %}"></script>#}
     <!------- Angular ------->
@@ -20,7 +28,7 @@
     <script src="{% static "js/app.js" %}"></script>
 
         <!------- Factories ------->
-
+    <script src="{% static "js/factories/userFactory.js" %}"></script>
 
         <!--- Filters ---->
 
@@ -40,12 +48,28 @@
 
 </head>
 <body>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+
+    <!-- GeoFire -->
+    <script src="https://cdn.firebase.com/libs/geofire/3.2.0/geofire.min.js"></script>
+        <title></title>
+
+    <script>
+        // Create a Firebase reference where GeoFire will store its information
+    var firebaseRef = new Firebase("https://johannas.firebaseio.com/");
+    // Create a GeoFire index
+    var geoFire = new GeoFire(firebaseRef);
+    var ref = geoFire.ref();  // ref === firebaseRef
+    </script>
+
     <div class="container">
         {% block content %}
         {% endblock %}
         <div class="row">
             <div class="col-md-12">
 {#                This is outside of our Angular app. You could put a navbar here, for example.#}
+            {{ request.user }}
             </div>
         </div>
         <div class="row">

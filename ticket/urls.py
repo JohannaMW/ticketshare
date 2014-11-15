@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
 from ticketshare.api.views import UserViewSet, JourneyViewSet
+from ticketshare.views import UserCreateView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet, base_name='users')
@@ -13,12 +14,10 @@ urlpatterns = patterns('',
     url(r'^home/$', 'ticketshare.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    # User Authentification
-    url(r'^register/$', 'ticketshare.views.register', name='register'),
-    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
-
     url(r'^admin/', include(admin.site.urls)),
+
+    #AUTHENTICATION
+    url('^api/v1/users/$', UserCreateView.as_view(), name='user-create'),
 
     #REST
     url(r'^', include(router.urls)),
