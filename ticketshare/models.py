@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(AbstractUser):
+class UserProfile(AbstractUser):
     picture = models.ImageField(null=True, blank=True)
     mobile = models.CharField(max_length=100, null=True, blank=True)
     ticket = models.BooleanField(default=False)
@@ -20,8 +20,8 @@ class Journey(models.Model):
     meeting_point = models.CharField(max_length=100)
     spots = models.IntegerField(default=0)
     description = models.TextField()
-    host = models.ManyToManyField(User, related_name="host")
-    attendee = models.ForeignKey(User, related_name="attendee")
+    host = models.ManyToManyField(UserProfile, related_name="host")
+    attendee = models.ForeignKey(UserProfile, related_name="attendee")
 
     def __unicode__(self):
         return u"{}".format(self.depart)

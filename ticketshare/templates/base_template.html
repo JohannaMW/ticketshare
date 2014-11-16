@@ -1,11 +1,15 @@
 {% load staticfiles %}
 
-<!DOCTYPE html>
 <html>
 <head>
     <title></title>
+
+     <!-- GOOGLE MAPS -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN3I45Mw0UYNqVNMGm_NwbhFCYnWgAz4U"></script>
+
     <!-- jQuery -->
-{#    <script src="{% static "js/vendors/jquery.js" %}"></script>#}
+    <script src="{% static "js/vendors/jquery.js" %}"></script>
+
     <!------- Angular ------->
     <script src="{% static "js/vendors/angular/angular.js" %}"></script>
     <script src="{% static "js/vendors/angular/angular-resource.js" %}"></script>
@@ -18,27 +22,39 @@
 
     <!-- JavaScript -->
     <script src="{% static "js/app.js" %}"></script>
+    <script src="{% static "js/vendors/geofire.js" %}"></script>
+    <script src="{% static "js/vendors/geofire.min.js" %}"></script>
+    <script src="{% static "js/vendors/rsvp.min.js" %}"></script>
 
-        <!------- Factories ------->
+    {% if user.is_authenticated %}
+    <script src="{% static "js/position.js" %}"></script>
+    {% endif %}
 
+    <!------- Factories ------->
 
-        <!--- Filters ---->
+    <!--- Filters ---->
 
-
-
-        <!--- Directives ---->
-
-
+    <!--- Directives ---->
 
     <!------- Controllers ------->
     <script src="{% static "js/controllers/homeController.js" %}"></script>
-    <script src="{% static "js/controllers/mapController.js" %}"></script>
+
+    <!-- CSS -->
+
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+
+    <!-- GeoFire -->
+    <script src="https://cdn.firebase.com/libs/geofire/3.2.0/geofire.min.js"></script>
+
+    <!-- Lo-Dash -->
+    <script src="{% static "js/vendors/lodash.min.js" %}"></script>
 
 
-        <!-- CSS -->
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
-
+    {% block header %}
+    {% endblock header %}
 </head>
+
 <body>
     <div class="container">
         {% block content %}
