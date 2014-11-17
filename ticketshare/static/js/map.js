@@ -12,6 +12,7 @@ $(document).ready(function() {
             center: [latitude, longitude],
             radius: 0.5
         });
+        window.geoQuery =geoQuery;
 
         var usersInQuery = {};
         var users = [];
@@ -36,8 +37,11 @@ $(document).ready(function() {
                 console.log(userCoord);
                 usersInQuery[username] = userCoord;
                 console.log(usersInQuery);
-                for (var i = 0; i < users.length; i++ ) {
-                    user.marker = createUserMarker(users[i]);
+                for (var key in usersInQuery) {
+                    var value = usersInQuery[key];
+                    console.log("Coordinates" + value);
+                    console.log("Username:" + key);
+                    user.marker = createUserMarker(value, key);
                     console.log(user.marker)
                 }
             });
@@ -116,9 +120,9 @@ $(document).ready(function() {
 /*  HELPER FUNCTIONS  */
 /**********************/
 
-function createUserMarker(user) {
+function createUserMarker(coord, username) {
     console.log("in marker function");
-    var loc = new google.maps.LatLng(user.l[1], user.l[0]);
+    var loc = new google.maps.LatLng(coord[1], coord[0]);
     console.log("marker" + loc);
     var marker = new google.maps.Marker({
        // icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small",
@@ -128,7 +132,7 @@ function createUserMarker(user) {
     });
     google.maps.event.addListener(marker, 'click', (function(user) {
 			return function() {
-				window.infowindow.setContent('Hello');
+				window.infowindow.setContent(username);
 				window.infowindow.open(map, marker);
 			}
 		})(marker, user));
@@ -143,6 +147,7 @@ function coordinatesAreEquivalent(coord1, coord2) {
 
 /* Animates the Marker class (based on https://stackoverflow.com/a/10906464) */
 google.maps.Marker.prototype.animatedMoveTo = function(newLocation) {
+
     var toLat = newLocation[0];
     var toLng = newLocation[1];
 
