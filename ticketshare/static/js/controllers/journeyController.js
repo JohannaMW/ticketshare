@@ -43,8 +43,12 @@ function journeyController($scope, $http, $routeParams, JourneyFactory, $locatio
 
     $scope.editJourney = function(journey) {
         var data = {
-            "title": $scope.journeyNewName,
-            "description": $scope.journeyNewDescription
+            "date": $scope.journeyDate,
+            "depart": $scope.journeyDepart,
+            "arrive": $scope.journeyArrive,
+            "meeting_point": $scope.journeyMeetingPoint,
+            "spots": $scope.journeySpots,
+            "description" : $scope.journeyDescription
         };
       JourneyFactory.editJourney(journey,data, function(response) {
            $location.path('/journeys/' + journeyId + '')

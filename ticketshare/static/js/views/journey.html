@@ -1,20 +1,25 @@
 <h1>Going from {{ journey.depart }} to {{ journey.arrive }}</h1>
 <p>
-    {{ journey.date }}<br>
-    {{ journey.host }}<br>
-    {{ journey.description }}<br>
-    {{ journey.spots }}
+    When: {{ journey.date }}<br>
+    With: {{ journey.host.username }}<br>
+    More info: {{ journey.description }}<br>
+    Available Spots: {{ journey.spots }}
 </p>
 
 <div ng-show="editing">
     <h3>Update Journey</h3>
-    New name: <input ng-model="projectNewName">
-    New Description: <input ng-model="projectNewDescription">
-    <button ng-click="editProject(project);">Edit</button>
+    When? <input type="datetime" ng-model="journeyDate">
+    From Where? <input ng-model="journeyDepart">
+    To Where? <input ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
+    How many spots are available? <input type="number" ng-model="journeySpots">
+    Description (optional) <input type="number" ng-model="journeyDescription">
+    <button ng-click="editJourney(journey);">Edit</button>
 </div>
 
 <div ng-show="attending" style="color:green;">
-    You are going on this journey! Pleas contact your host {{ journey.host }} under
+    You are going on this journey! Pleas contact your host {{ journey.host.username }} under {{ journey.host.email }}
+    or {{ journey.host.mobile }}
 </div>
 
 <button ng-click="attendJourney();">Attend Journey</button>

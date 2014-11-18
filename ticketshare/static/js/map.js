@@ -4,7 +4,7 @@ $(document).ready(function() {
     var radiusInKm = 0.15;
     var markers = [];
     var usersInQuery = {};
-    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { frequency: 2000 });
+    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { frequency: 500 });
 
     function onSuccess(position) {
         latitude = position.coords.latitude;
@@ -27,7 +27,7 @@ $(document).ready(function() {
             // update User Entry
             usersInQuery[user] = userLocation;
             console.log('Moved:' + username);
-            user.marker = createUserMarker(userLocation, user);
+            positionMarker(usersInQuery);
             // user.marker.animatedMoveTo(userLocation);
         });
 
@@ -60,16 +60,23 @@ $(document).ready(function() {
             window.infowindow = infowindow;
             window.map = map;
 
-
-            for (user in usersInQuery) {
+            Object.keys(usersInQuery).forEach(function (user) {
                 console.log(user);
                 console.log(usersInQuery[user][0]);
                     marker = new google.maps.Marker({
                     position: new google.maps.LatLng(usersInQuery[user][0][0], usersInQuery[user][0][1]),
                     map: map
                 });
-            }
-         
+                var infoWindow = new google.maps.InfoWindow();
+
+                google.maps.event.addListener(marker, 'click', function () {
+                var markerContent = user;
+                infoWindow.setContent(markerContent);
+                infoWindow.open(map, this);
+            });
+
+            });
+
 
             // Create a draggable circle centered on the map
             var circle = new google.maps.Circle({
@@ -93,12 +100,12 @@ $(document).ready(function() {
                 });
               }, 10);
               google.maps.event.addListener(circle, "drag", updateCriteria);
-
           }
        });
 
     }
-    google.maps.event.addDomListener(window, 'load', initialize);
+    setTimeout(initialize, 1000);
+ //  google.maps.event.addDomListener(window, 'load', initialize);
 
     function onError(error) {
         console.log(error)
@@ -107,6 +114,24 @@ $(document).ready(function() {
 /**********************/
 /*  HELPER FUNCTIONS  */
 /**********************/
+function positionMarker(usersInQuery) {
+    Object.keys(usersInQuery).forEach(function (user) {
+                console.log(user);
+                console.log(usersInQuery[user][0]);
+                    marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(usersInQuery[user][0][0], usersInQuery[user][0][1]),
+                    map: map
+                });
+                var infoWindow = new google.maps.InfoWindow();
+
+                google.maps.event.addListener(marker, 'click', function () {
+                var markerContent = user;
+                infoWindow.setContent(markerContent);
+                infoWindow.open(map, this);
+            });
+
+            });
+}
 
 //function createUserMarker(coord, username) {
 //    var loc = new google.maps.LatLng(coord[1], coord[0]);
@@ -129,11 +154,10 @@ $(document).ready(function() {
 //}
 
 /* Returns true if the two inputted coordinates are approximately equivalent */
-function coordinatesAreEquivalent(coord1, coord2) {
-  return (Math.abs(coord1 - coord2) < 0.000001);
-}
+
 
 /* Animates the Marker class (based on https://stackoverflow.com/a/10906464) */
+
 google.maps.Marker.prototype.animatedMoveTo = function(newLocation) {
 
     var toLat = newLocation[0];
