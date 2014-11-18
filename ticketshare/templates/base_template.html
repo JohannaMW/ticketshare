@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <html>
 <head>
     <title></title>
@@ -27,19 +26,25 @@
     <script src="{% static "js/vendors/rsvp.min.js" %}"></script>
 
     {% if user.is_authenticated %}
+        {% if user.ticket %}
     <script src="{% static "js/position.js" %}"></script>
+        {% endif %}
     {% endif %}
 
     <!------- Factories ------->
+    <script src="{% static "js/factories/journeyFactory.js" %}"></script>
 
     <!--- Filters ---->
 
     <!--- Directives ---->
 
     <!------- Controllers ------->
+    <script src="{% static "js/controllers/journeyController.js" %}"></script>
     <script src="{% static "js/controllers/homeController.js" %}"></script>
+    <script src="{% static "js/controllers/userController.js" %}"></script>
 
     <!-- CSS -->
+    <script src="{% static "css/custom_style.css" %}"></script>
 
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>

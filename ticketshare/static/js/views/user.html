@@ -1,0 +1,11 @@
+<h2>{{ user.username }}</h2>
+
+<h4>Number of Journeys user is going on</h4>
+{{ user.journey_count }}
+
+<h4>Journeys</h4>
+<ul>
+<div ng-repeat="journey in user.journeys_attend track by $index">
+    <li><a href="#/journey/{{ journey.id }}"/>{{ journey.depart }} to {{ journey.arrive }}</li></div>
+    <p>{{ journey.description }}</p>
+</ul>

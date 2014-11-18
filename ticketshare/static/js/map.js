@@ -2,61 +2,39 @@ $(document).ready(function() {
     var firebaseRef = new Firebase("https://johannas.firebaseio.com/");
     var geoFire = new GeoFire(firebaseRef);
     var radiusInKm = 0.15;
-    var ref = geoFire.ref();
+    var markers = [];
+    var usersInQuery = {};
+    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { frequency: 2000 });
 
     function onSuccess(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log("That's for the map" + latitude + longitude);
+
         var geoQuery = geoFire.query({
             center: [latitude, longitude],
             radius: 0.5
         });
-        window.geoQuery =geoQuery;
+        window.geoQuery = geoQuery;
 
-        var usersInQuery = {};
-        var users = [];
-
-        geoQuery.on("key_entered", function (username) {
-            var userCoord = [];
-            console.log("in function:" + username);
-            username = username.split(":")[0];
-            console.log(username);
-            usersInQuery[username] = true;
-
-
-            firebaseRef.child(username).once("value", function (dataSnapshot) {
-                user = dataSnapshot.val();
-                users.push(user);
-                console.log(user);
-                console.log("Users" + users);
-                userLongitude = user.l[0];
-                userLatitude = user.l[1];
-                userCoord.push(userLongitude);
-                userCoord.push(userLatitude);
-                console.log(userCoord);
-                usersInQuery[username] = userCoord;
-                console.log(usersInQuery);
-                for (var key in usersInQuery) {
-                    var value = usersInQuery[key];
-                    console.log("Coordinates" + value);
-                    console.log("Username:" + key);
-                    user.marker = createUserMarker(value, key);
-                    console.log(user.marker)
-                }
+       geoQuery.on("key_entered", function (user, location, distance) {
+            console.log ("user" + user + "location" + location + "distance" + distance);
+            usersInQuery[user] = [location];
+            //user.marker = createUserMarker(location, user);
+            console.log("Users in Query:" + usersInQuery )
             });
-        });
-        geoQuery.on("key_moved", function (username) {
-            // Get the user from the list of vehicles in the query
-            var userLocation = usersInQuery[username];
-            console.log('Moved:' + user);
-            user.marker.animatedMoveTo(userLocation);
+
+        geoQuery.on("key_moved", function (user, userLocation) {
+            // update User Entry
+            usersInQuery[user] = userLocation;
+            console.log('Moved:' + username);
+            user.marker = createUserMarker(userLocation, user);
+            // user.marker.animatedMoveTo(userLocation);
         });
 
-        /* Removes vehicle markers from the map when they exit the query */
-        geoQuery.on("key_exited", function (username) {
-            console.log("EXITED:" + username);
-            delete usersInQuery[username];
+        /* Removes user markers from the map when they exit the query */
+        geoQuery.on("key_exited", function (user) {
+            console.log("EXITED:" + user);
+            delete usersInQuery[user];
         });
     }
 
@@ -68,7 +46,7 @@ $(document).ready(function() {
             var Userlongitude = data[0].fields.long;
             var Userlatitude = data[0].fields.lat;
             var loc = new google.maps.LatLng(Userlatitude, Userlongitude);
-            console.log('where am i'+ Userlatitude + ',' + Userlongitude);
+
             var mapOptions = {
               center: loc,
               zoom: 20,
@@ -77,9 +55,21 @@ $(document).ready(function() {
 
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
+
             var infowindow = new google.maps.InfoWindow();
             window.infowindow = infowindow;
             window.map = map;
+
+
+            for (user in usersInQuery) {
+                console.log(user);
+                console.log(usersInQuery[user][0]);
+                    marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(usersInQuery[user][0][0], usersInQuery[user][0][1]),
+                    map: map
+                });
+            }
+         
 
             // Create a draggable circle centered on the map
             var circle = new google.maps.Circle({
@@ -93,6 +83,7 @@ $(document).ready(function() {
             radius: ((radiusInKm) * 200),
             draggable: true
           });
+
             //Update the query's criteria every time the circle is dragged
             var updateCriteria = _.debounce(function() {
                 var latLng = circle.getCenter();
@@ -113,32 +104,29 @@ $(document).ready(function() {
         console.log(error)
     }
 
-    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { frequency: 2000 });
-
-
 /**********************/
 /*  HELPER FUNCTIONS  */
 /**********************/
 
-function createUserMarker(coord, username) {
-    console.log("in marker function");
-    var loc = new google.maps.LatLng(coord[1], coord[0]);
-    console.log("marker" + loc);
-    var marker = new google.maps.Marker({
-       // icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small",
-        position: loc,
-        optimized: true,
-        map: window.map
-    });
-    google.maps.event.addListener(marker, 'click', (function(user) {
-			return function() {
-				window.infowindow.setContent(username);
-				window.infowindow.open(map, marker);
-			}
-		})(marker, user));
-    return marker;
-    console.log('Marker' + marker);
-}
+//function createUserMarker(coord, username) {
+//    var loc = new google.maps.LatLng(coord[1], coord[0]);
+//    var marker = new google.maps.Marker({
+//       // icon: "https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small",
+//        position: loc,
+//        optimized: true,
+//        map: window.map
+//    });
+//    google.maps.event.addListener(marker, 'click', (function(user) {
+//			return function() {
+//				window.infowindow.setContent(username);
+//				window.infowindow.open(map, marker);
+//			}
+//		}));
+//    console.log('Marker' + marker);
+//    markers.push(marker);
+//    console.log("Markers List:" + markers);
+//    return marker;
+//}
 
 /* Returns true if the two inputted coordinates are approximately equivalent */
 function coordinatesAreEquivalent(coord1, coord2) {

@@ -1,3 +1,26 @@
+<div text-directive=""></div>
+<h3>Recently Added Journeys</h3>
 <div>
-    <h1>Home</h1>
+
+<div ng-repeat="journey in journeys track by $index">
+    <p>
+   <a href="#/journey/{{ journey.id }}">From {{ journey.depart }} to {{ journey.arrive }}</a>
+    <br>
+    {{ journey.date }}
+    </p>
 </div>
+
+    <button ng-click="creating();">Going on a Journey?</button>
+
+<div ng-show="create">
+    <h3>Create a Journey</h3>
+    When? <input type="datetime" ng-model="journeyDate">
+    From Where? <input ng-model="journeyDepart">
+    To Where? <input ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
+    How many spots are available? <input type="number" ng-model="journeySpots">
+    Description (optional) <input type="number" ng-model="journeyDescription">
+    <button ng-click="createJourney();">Create</button>
+</div>
+</div>
+

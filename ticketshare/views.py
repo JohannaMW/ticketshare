@@ -21,9 +21,20 @@ def set_position(request):
         user.save()
         return HttpResponse(status=200)
 
+@csrf_exempt
+def set_ticket_status(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user = UserProfile.objects.get(username=request.user)
+        user.ticket = True
+        user.save()
+        return HttpResponse(status=200)
+
+@csrf_exempt
 def home(request):
     return render(request, 'home.html')
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

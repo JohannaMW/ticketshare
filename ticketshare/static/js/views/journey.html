@@ -1,0 +1,22 @@
+<h1>Going from {{ journey.depart }} to {{ journey.arrive }}</h1>
+<p>
+    {{ journey.date }}<br>
+    {{ journey.host }}<br>
+    {{ journey.description }}<br>
+    {{ journey.spots }}
+</p>
+
+<div ng-show="editing">
+    <h3>Update Journey</h3>
+    New name: <input ng-model="projectNewName">
+    New Description: <input ng-model="projectNewDescription">
+    <button ng-click="editProject(project);">Edit</button>
+</div>
+
+<div ng-show="attending" style="color:green;">
+    You are going on this journey! Pleas contact your host {{ journey.host }} under
+</div>
+
+<button ng-click="attendJourney();">Attend Journey</button>
+<button ng-click="deleteJourney(journey);">Delete Journey</button>
+<button ng-click="editing();">Edit Journey</button>

@@ -12,6 +12,12 @@ $(document).ready(function() {
         }
     });
 
+    $('button#ticket').on('click', function() {
+        navigator.geolocation.watchPosition(showPosition);
+        console.log('clicked');
+        $(this).css("background-color","limegreen");
+    });
+
     var firebaseRef = new Firebase("https://johannas.firebaseio.com/");
     var geoFire = new GeoFire(firebaseRef);
     var ref = geoFire.ref();  // ref === firebaseRef
