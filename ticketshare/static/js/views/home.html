@@ -6,8 +6,15 @@
     <p>
    <a href="#/journey/{{ journey.id }}">From {{ journey.depart }} to {{ journey.arrive }}</a>
     <br>
-    {{ journey.date }}
-    </p>
+    {{ journey.date }}<br>
+
+
+<p>
+    When: {{ journey.date }}<br>
+    With: {{ journey.host.username }}<br>
+    More info: {{ journey.description }}<br>
+    Available Spots: {{ journey.spots }}
+</p>
 </div>
 
     <button ng-click="creating();">Going on a Journey?</button>

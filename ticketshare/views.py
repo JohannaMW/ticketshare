@@ -7,7 +7,6 @@ from ticketshare.forms import UserForm
 import json
 from ticketshare.models import UserProfile
 
-
 @csrf_exempt
 def set_position(request):
     if request.method == 'POST':

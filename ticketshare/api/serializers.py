@@ -4,6 +4,7 @@ from ticketshare.models import UserProfile, Journey
 class JourneySerializer(serializers.ModelSerializer):
     class Meta:
         model = Journey
+        read_only_fields = ('host',)
 
 class UserSerializer(serializers.ModelSerializer):
     journey_host = serializers.SerializerMethodField('get_journey_host')

@@ -20,8 +20,8 @@ class Journey(models.Model):
     meeting_point = models.CharField(max_length=100)
     spots = models.IntegerField(default=0, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    host = models.ManyToManyField(UserProfile, related_name="host")
-    attendee = models.ForeignKey(UserProfile, related_name="attendee", null=True, blank=True)
+    host = models.ForeignKey(UserProfile, related_name="host")
+    attendee = models.ManyToManyField(UserProfile, related_name="attendee", null=True, blank=True)
 
     def __unicode__(self):
         return u"{}".format(self.depart)

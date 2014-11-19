@@ -1,4 +1,4 @@
-function journeyController($scope, $http, $routeParams, JourneyFactory, $location) {
+function journeyController($scope, $http, $routeParams, JourneyFactory, $location, $cookies) {
     var journeyId = $routeParams.id;
     $scope.editing = false;
     $scope.attending = false;
@@ -25,7 +25,7 @@ function journeyController($scope, $http, $routeParams, JourneyFactory, $locatio
         });
     };
 
-    $scope.deleteJorney = function(journey) {
+    $scope.deleteJourney = function(journey) {
         JourneyFactory.deleteJourney(journey, function (response) {
             $location.path('/home/')
         });

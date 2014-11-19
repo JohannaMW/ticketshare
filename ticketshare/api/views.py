@@ -1,6 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
 from serializers import *
-from ticketshare.api.permissions import IsOwnerOrReadOnly
+#from ticketshare.api.permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class JourneyViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsOwnerOrReadOnly,)
+   # permission_classes = (IsOwnerOrReadOnly,)
     queryset = Journey.objects.all()
     serializer_class = JourneySerializer
     # one way to filter after username
@@ -33,7 +33,9 @@ class JourneyViewSet(viewsets.ModelViewSet):
 
     @csrf_exempt
     def pre_save(self, obj):
-        obj.host = self.request.user
+        user = self.request.user
+        print user
+        obj.host = user
 
     def get_queryset(self):
         queryset = Journey.objects.all()
@@ -48,7 +50,6 @@ class JourneyViewSet(viewsets.ModelViewSet):
         attendee_id = request.user.id
         journey.attendee.add(attendee_id)
         return Response(status=status.HTTP_200_OK)
-
 
 
 

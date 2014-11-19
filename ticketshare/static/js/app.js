@@ -1,4 +1,11 @@
-var ticket_ang = angular.module('ticket_ang', ['ngRoute']);
+var ticket_ang = angular.module('ticket_ang', ['ngRoute', 'ngCookies']);
+
+ticket_ang.run(function ($http, $cookies) {
+    console.log(csrftoken);
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+    $http.defaults.headers.put['X-CSRFToken'] = $cookies['csrftoken'];
+    $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+});
 
 ticket_ang.config(['$routeProvider', function($routeProvider) {
     $routeProvider.

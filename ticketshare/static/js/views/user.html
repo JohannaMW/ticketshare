@@ -1,11 +1,35 @@
-<h2>{{ user.username }}</h2>
+<h1>Hello {{ user.first_name }}</h1>
 
-<h4>Number of Journeys user is going on</h4>
-{{ user.journey_count }}
+<h3>Your Credentials</h3>
+<p>
+    Username: {{ user.username }}<br>
+    First Name: {{ user.first_name }}<br>
+    Last Name: {{ user.last_name }}<br>
+    Mobile: {{ user.mobile }}
+</p>
 
-<h4>Journeys</h4>
-<ul>
-<div ng-repeat="journey in user.journeys_attend track by $index">
-    <li><a href="#/journey/{{ journey.id }}"/>{{ journey.depart }} to {{ journey.arrive }}</li></div>
-    <p>{{ journey.description }}</p>
-</ul>
+<button ng-click="deleteUser(user);">Delete Profile</button>
+<button ng-click="edit();">Edit Profile</button>
+
+<div ng-show="editing">
+    <h3>Update User</h3>
+    Username <input ng-model="newUsername">
+    First Name <input ng-model="newFirstName">
+    Last Name <input ng-model="newLastName">
+    Mobile <input ng-model="newMobile">
+    Please confirm your password <input type="password" ng-model="Password">
+    <button ng-click="editUser(user);">Edit</button>
+</div>
+
+<h3>Journeys you are attending</h3>
+<div ng-repeat="journey in user.journey_attend track by $index">
+    <h4>From {{ journey.depart }} to {{ journey.arrive }}</h4>
+<p>
+    From: {{ journey.depart }}<br>
+    To: {{ journey.arrive }}<br>
+    When: {{ journey.date }}<br>
+    Meeting Point: {{ journey.meeting_point }}<br>
+    Host: {{ journey.host }}
+</p>
+
+</div>

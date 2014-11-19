@@ -9,15 +9,19 @@
     <!-- jQuery -->
     <script src="{% static "js/vendors/jquery.js" %}"></script>
 
+    <script type="text/javascript">var csrftoken = "{% csrf_token %}";</script>
+
     <!------- Angular ------->
     <script src="{% static "js/vendors/angular/angular.js" %}"></script>
     <script src="{% static "js/vendors/angular/angular-resource.js" %}"></script>
     <script src="{% static "js/vendors/angular/angular-route.js" %}"></script>
+<script src="{% static "js/vendors/angular/angular-cookies.js" %}"></script>
 
 
     <!------- Bootstrap ------->
     <script src="{% static "js/vendors/angular-ui/ui-bootstrap-tpls-0.11.2.min.js" %}"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     <!-- JavaScript -->
     <script src="{% static "js/app.js" %}"></script>
@@ -26,6 +30,7 @@
     <script src="{% static "js/vendors/rsvp.min.js" %}"></script>
 
     {% if user.is_authenticated %}
+        <script src="{% static "js/position.js" %}"></script>
         {% if user.ticket %}
     <script src="{% static "js/position.js" %}"></script>
         {% endif %}
@@ -33,6 +38,7 @@
 
     <!------- Factories ------->
     <script src="{% static "js/factories/journeyFactory.js" %}"></script>
+    <script src="{% static "js/factories/userFactory.js" %}"></script>
 
     <!--- Filters ---->
 
