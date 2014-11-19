@@ -15,8 +15,14 @@ $(document).ready(function() {
     $('button#ticket').on('click', function() {
         navigator.geolocation.watchPosition(showPosition);
         console.log('clicked');
-        $(this).css("background-color","limegreen");
+        $(this).attr('class', 'btn btn-success').value = "Ticket!";
     });
+
+    function change() // no ';' here
+    {
+        if (this.value=="Close Curtain") this.value = "Open Curtain";
+        else this.value = "Close Curtain";
+    }
 
     var firebaseRef = new Firebase("https://johannas.firebaseio.com/");
     var geoFire = new GeoFire(firebaseRef);

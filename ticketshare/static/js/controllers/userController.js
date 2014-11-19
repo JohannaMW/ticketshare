@@ -1,6 +1,8 @@
-function userController($scope, $http, $routeParams, UserFactory, $location) {
+function userController($scope, $http, $routeParams, UserFactory, JourneyFactory, $location) {
     var userId = $routeParams.id;
-    $scope.editing = false;
+    $scope.editingUser = false;
+    $scope.editingUser = false;
+    $scope.create = false;
 
     UserFactory.getUser(userId, function (response) {
             console.log(response);
@@ -27,8 +29,68 @@ function userController($scope, $http, $routeParams, UserFactory, $location) {
       });
     };
 
-    $scope.edit = function () {
+    $scope.editU = function () {
         console.log("edit klicked");
-        $scope.editing = true;
+        $scope.editingUser = true;
+    };
+
+    $http.get('/journeys/').
+        success(function (data) {
+            $scope.journeys = data;
+            console.log(data);
+        }).error(function (data) {
+            console.log("didn't work");
+        });
+
+     $scope.creating = function () {
+        $scope.create = true;
+    };
+
+    $scope.createJourney = function () {
+        var data = {
+            "date": $scope.journeyDate,
+            "depart": $scope.journeyDepart,
+            "arrive": $scope.journeyArrive,
+            "meeting_point": $scope.journeyMeetingPoint,
+            "spots": $scope.journeySpots,
+            "description" : $scope.journeyDescription
+        };
+        JourneyFactory.createJourney(data, function (response) {
+            $location.path('/home')
+        });
+    };
+    $scope.getJourney = function (journey) {
+        $http.get('/journeys/' + journey.id + '').
+            success(function (data) {
+                $scope.journey = data;
+                console.log($scope.journey);
+
+            }).error(function (data) {
+                console.log("didn't work");
+            });
+    };
+
+    $scope.deleteJorney = function(journey) {
+        JourneyFactory.deleteJourney(journey, function (response) {
+            $location.path('/home/')
+        });
+    };
+
+    $scope.editJourney = function(journey) {
+        var data = {
+            "date": $scope.journeyDate,
+            "depart": $scope.journeyDepart,
+            "arrive": $scope.journeyArrive,
+            "meeting_point": $scope.journeyMeetingPoint,
+            "spots": $scope.journeySpots,
+            "description" : $scope.journeyDescription
+        };
+      JourneyFactory.editJourney(journey,data, function(response) {
+           $location.path('/journeys/' + journeyId + '')
+      });
+    };
+
+    $scope.editingJ = function (event) {
+        $scope.editingJourney = true;
     }
 }

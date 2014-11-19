@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
         write_only_fields = ('password',)
 
     def get_journey_host(self, obj):
-        return obj.host.count()
+        return Journey.objects.filter(host=obj).values()
 
     def get_journey_attend(self, obj):
         return Journey.objects.filter(attendee=obj).values()

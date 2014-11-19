@@ -9,9 +9,9 @@
 </p>
 
 <button ng-click="deleteUser(user);">Delete Profile</button>
-<button ng-click="edit();">Edit Profile</button>
+<button ng-click="editU();">Edit Profile</button>
 
-<div ng-show="editing">
+<div ng-show="editingUser">
     <h3>Update User</h3>
     Username <input ng-model="newUsername">
     First Name <input ng-model="newFirstName">
@@ -31,5 +31,45 @@
     Meeting Point: {{ journey.meeting_point }}<br>
     Host: {{ journey.host }}
 </p>
+
+</div>
+
+<h3>Journeys you are hosting</h3>
+<div ng-repeat="journey in user.journey_host track by $index">
+    <h4>From {{ journey.depart }} to {{ journey.arrive }}</h4>
+<p>
+    From: {{ journey.depart }}<br>
+    To: {{ journey.arrive }}<br>
+    When: {{ journey.date }}<br>
+    Meeting Point: {{ journey.meeting_point }}<br>
+    Host: {{ journey.host }}
+</p>
+<div ng-show="editingJourney">
+    <h3>Update Journey</h3>
+    When? <input type="datetime" ng-model="journeyDate">
+    From Where? <input ng-model="journeyDepart">
+    To Where? <input ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
+    How many spots are available? <input type="number" ng-model="journeySpots">
+    Description (optional) <input type="number" ng-model="journeyDescription">
+    <button ng-click="editJourney(journey);">Edit</button>
+</div>
+
+<button ng-click="deleteJourney(journey);">Delete Journey</button>
+<button ng-click="editingJ();">Edit Journey</button>
+</div>
+
+    <button ng-click="creating();">Going on a Journey?</button>
+
+<div ng-show="create">
+    <h3>Create a Journey</h3>
+    When? <input type="datetime" ng-model="journeyDate">
+    From Where? <input ng-model="journeyDepart">
+    To Where? <input ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
+    How many spots are available? <input type="number" ng-model="journeySpots">
+    Description (optional) <input type="number" ng-model="journeyDescription">
+    <button ng-click="createJourney();">Create</button>
+</div>
 
 </div>

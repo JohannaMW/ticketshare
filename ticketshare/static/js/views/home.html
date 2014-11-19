@@ -1,13 +1,10 @@
 <div text-directive=""></div>
 <h3>Recently Added Journeys</h3>
 <div>
+ Search Journey <input ng-model="searchText" />
 
-<div ng-repeat="journey in journeys track by $index">
-    <p>
-   <a href="#/journey/{{ journey.id }}">From {{ journey.depart }} to {{ journey.arrive }}</a>
-    <br>
-    {{ journey.date }}<br>
-
+<div ng-repeat="journey in journeys track by $index | filter: searchText">
+<h4><a href="#/journey/{{ journey.id }}">From {{ journey.depart }} to {{ journey.arrive }} on {{ journey.date }}</a></h4>
 
 <p>
     When: {{ journey.date }}<br>
@@ -15,9 +12,16 @@
     More info: {{ journey.description }}<br>
     Available Spots: {{ journey.spots }}
 </p>
+
+<div ng-show="attending" style="color:green;">
+    You are going on this journey! Please contact your host {{ journey.host.username }} under {{ journey.host.email }}
+    or {{ journey.host.mobile }}
 </div>
 
-    <button ng-click="creating();">Going on a Journey?</button>
+<button ng-click="attendJourney(journey);">Attend Journey</button>
+</div>
+
+ <button ng-click="creating();">Going on a Journey?</button>
 
 <div ng-show="create">
     <h3>Create a Journey</h3>

@@ -1,6 +1,24 @@
 {% extends 'base_template.html' %}
+{% block header %}
+{% endblock %}
 {% block content %}
-    <button><a href="/map/#">Get a free ride!</a></button>
-    <button id="ticket">Got a ticket?</button>
-    <button><a href="/home/">Check out our journeys</a></button>
+
+    <style type="text/css">
+     #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+    <div id="video">
+  <iframe frameborder="0" height="100%" width="100%"
+    src="https://youtube.com/embed/CJGcopKw1Ao?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=CJGcopKw1Ao">
+  </iframe>
+</div>
+
+    <row>
+    <center>
+        <button type="button" id="ticket" class="btn btn-primary">Got a Ticket?</button>
+    </center>
+     </row>
+<script src="/static/js/map.js"></script>
+    <div id="map-canvas">
+</div>
+
 {% endblock content %}

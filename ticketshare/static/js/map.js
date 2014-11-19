@@ -26,7 +26,7 @@ $(document).ready(function() {
         geoQuery.on("key_moved", function (user, userLocation) {
             // update User Entry
             usersInQuery[user] = userLocation;
-            console.log('Moved:' + username);
+            console.log('Moved:' + user);
             positionMarker(usersInQuery);
             // user.marker.animatedMoveTo(userLocation);
         });

@@ -56,6 +56,6 @@ function journeyController($scope, $http, $routeParams, JourneyFactory, $locatio
     };
 
     $scope.editing = function () {
-        $scope.editing = true;
+        $(this).editing = true;
     }
 }

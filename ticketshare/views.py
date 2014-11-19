@@ -1,11 +1,16 @@
 from django.contrib.auth import authenticate, login
 from django.core import serializers
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from ticketshare.forms import UserForm
-import json
 from ticketshare.models import UserProfile
+from django.shortcuts import render
+from django.contrib.auth import login
+from django.http import HttpResponse
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
+from forms import *
+import json
 
 @csrf_exempt
 def set_position(request):
