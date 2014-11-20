@@ -7,7 +7,7 @@ class UserForm(UserCreationForm):
     #email = forms.EmailField(required=True)
     class Meta:
         model = get_user_model()
-        fields = ("username", "first_name", "last_name", "password1", "password2")
+        fields = ("username", "first_name", "last_name", "mobile", "password1", "password2")
 
     def clean_username(self):
         username = self.cleaned_data["username"]

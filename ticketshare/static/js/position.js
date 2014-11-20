@@ -18,12 +18,6 @@ $(document).ready(function() {
         $(this).attr('class', 'btn btn-success').value = "Ticket!";
     });
 
-    function change() // no ';' here
-    {
-        if (this.value=="Close Curtain") this.value = "Open Curtain";
-        else this.value = "Close Curtain";
-    }
-
     var firebaseRef = new Firebase("https://johannas.firebaseio.com/");
     var geoFire = new GeoFire(firebaseRef);
     var ref = geoFire.ref();  // ref === firebaseRef

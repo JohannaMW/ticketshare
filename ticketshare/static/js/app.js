@@ -1,4 +1,4 @@
-var ticket_ang = angular.module('ticket_ang', ['ngRoute', 'ngCookies']);
+var ticket_ang = angular.module('ticket_ang', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
 
 ticket_ang.run(function ($http, $cookies) {
     console.log(csrftoken);

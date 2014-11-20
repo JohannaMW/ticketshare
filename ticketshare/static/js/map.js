@@ -87,7 +87,7 @@ $(document).ready(function() {
             fillOpacity: 0.35,
             map: map,
             center: loc,
-            radius: ((radiusInKm) * 200),
+            radius: (0.5 * 200),
             draggable: true
           });
 
@@ -100,7 +100,15 @@ $(document).ready(function() {
                 });
               }, 10);
               google.maps.event.addListener(circle, "drag", updateCriteria);
+
+                        // Resize stuff...
+            google.maps.event.addDomListener(window, "resize", function() {
+               var center = map.getCenter();
+               google.maps.event.trigger(map, "resize");
+               map.setCenter(center);
+            });
           }
+
        });
 
     }

@@ -1,11 +1,6 @@
 from rest_framework import serializers
 from ticketshare.models import UserProfile, Journey
 
-class JourneySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Journey
-        read_only_fields = ('host',)
-
 class UserSerializer(serializers.ModelSerializer):
     journey_host = serializers.SerializerMethodField('get_journey_host')
     journey_attend = serializers.SerializerMethodField('get_journey_attend')
@@ -22,11 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
     def get_journey_attend(self, obj):
         return Journey.objects.filter(attendee=obj).values()
 
-    def validate_password(self, attrs, source):
-        username = attrs['username']
-        password = attrs[source]
-        if password == username:
-            raise serializers.ValidationError("Password can not be same as username!")
-        if len(password)<4:
-            raise serializers.ValidationError("Password is too short!")
-        return attrs
+class JourneySerializer(serializers.ModelSerializer):
+    host = UserSerializer()
+    class Meta:
+        model = Journey
+        #read_only_fields = ('host',)

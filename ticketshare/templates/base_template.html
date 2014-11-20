@@ -22,6 +22,7 @@
     <script src="{% static "js/vendors/angular-ui/ui-bootstrap-tpls-0.11.2.min.js" %}"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static "js/vendors/angular-ui/ui-bootstrap-tpls-0.11.2.js" %}"></script>
 
     <!-- JavaScript -->
     <script src="{% static "js/app.js" %}"></script>
@@ -31,14 +32,6 @@
 
     {% if user.is_authenticated %}
         <script src="{% static "js/position.js" %}"></script>
-       <li><a href="{% url 'logout'%}">Logout</a></li>
-       <li><a href= "/home/#/user/{{ user.id }}">My Profile</a></li>
-        {% if user.ticket %}
-    <script src="{% static "js/position.js" %}"></script>
-        {% endif %}
-        {% else %}
-         <li><a href="{% url 'login'%}">Login</a></li>
-         <li><a href="{% url 'register'%}">Register</a></li>
     {% endif %}
 
     <!------- Factories ------->
@@ -48,6 +41,7 @@
     <!--- Filters ---->
 
     <!--- Directives ---->
+    <script src="{% static "js/directives/buttonDirective.js" %}"></script>
 
     <!------- Controllers ------->
     <script src="{% static "js/controllers/journeyController.js" %}"></script>
@@ -55,7 +49,6 @@
     <script src="{% static "js/controllers/userController.js" %}"></script>
 
     <!-- CSS -->
-    <script src="{% static "css/custom_style.css" %}"></script>
     <script src="{% static "css/reset.min.css" %}"></script>
 
     <!-- Firebase -->
@@ -69,12 +62,49 @@
 
     <!--Map-->
     <script src="{% static "js/map.js" %}"></script>
+    <script src="{% static "css/custom_style.css" %}"></script>
 
+<!--Google Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     {% block header %}
     {% endblock header %}
 </head>
 
 <body>
+<nav class="navbar navbar-default navbar-static-top" role=navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Tikky</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right ">
+        {% if user.is_authenticated %}
+       <li><a href="{% url 'logout'%}">Logout</a></li>
+       <li><a href= "/home/#/user/{{ user.id }}">My Profile</a></li>
+        {% if user.ticket %}
+    <script src="{% static "js/position.js" %}"></script>
+        {% endif %}
+        {% else %}
+         <li><a href="{% url 'login'%}">Login</a></li>
+         <li><a href="{% url 'register'%}">Register</a></li>
+    {% endif %}
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
     <div class="container">
         {% block content %}
         {% endblock %}

@@ -1,37 +1,74 @@
-<div text-directive=""></div>
-<h3>Recently Added Journeys</h3>
-<div>
- Search Journey <input ng-model="searchText" />
+   <style type="text/css">
+     .attend { margin-top: 20px; margin-bottom: 10px;}
+     .journey_title {text-decoration: underline; }
+     container {font-family: 'Open Sans Condensed', sans-serif;}
+    </style>
 
-<div ng-repeat="journey in journeys track by $index | filter: searchText">
-<h4><a href="#/journey/{{ journey.id }}">From {{ journey.depart }} to {{ journey.arrive }} on {{ journey.date }}</a></h4>
+<container style="margin-left: 40px; ">
+<row>
+    <div class="col-md-12 col-xs-18">
+<b><h3>Recently Added Journeys</h3></b>
+<input class="form-control" ng-model="searchText" />
+        </div>
+</row>
+        <row>
+    <div class="col-md-12 col-xs-18">
+        <br>
+        <br>
+       <button ng-click="creating();">Going on a Journey?</button>
+        </div>
+</row>
 
-<p>
-    When: {{ journey.date }}<br>
-    With: {{ journey.host.username }}<br>
-    More info: {{ journey.description }}<br>
-    Available Spots: {{ journey.spots }}
-</p>
-
-<div ng-show="attending" style="color:green;">
-    You are going on this journey! Please contact your host {{ journey.host.username }} under {{ journey.host.email }}
-    or {{ journey.host.mobile }}
-</div>
-
-<button ng-click="attendJourney(journey);">Attend Journey</button>
-</div>
-
- <button ng-click="creating();">Going on a Journey?</button>
-
+    <row>
 <div ng-show="create">
     <h3>Create a Journey</h3>
-    When? <input type="datetime" ng-model="journeyDate">
-    From Where? <input ng-model="journeyDepart">
-    To Where? <input ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
-    How many spots are available? <input type="number" ng-model="journeySpots">
-    Description (optional) <input type="number" ng-model="journeyDescription">
+    <span class="input-group">
+              When? <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </span>
+    From Where? <input class="form-control" ng-model="journeyDepart">
+    To Where? <input class="form-control" ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
+    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
+    Description (optional) <input class="form-control" type="text" ng-model="journeyDescription">
     <button ng-click="createJourney();">Create</button>
 </div>
+</row>
+
+
+<div ng-repeat="journey in journeys | filter:searchText">
+<row>
+    <div class="col-md-8 col-xs-12">
+        <h4 class="journey_title">From {{ journey.depart }} to {{ journey.arrive }} on {{ journey.date }}</h4>
+        <table class="journey_description">
+            <tr>
+                <td>With</td>
+                <td>{{ journey.host.username }}</td>
+            </tr>
+            <tr>
+                <td>When</td>
+                <td>{{ journey.date }}</td>
+            </tr>
+            <tr>
+                <td>More Info</td>
+                <td>{{ journey.description }}</td>
+            </tr>
+            <tr>
+                <td>Available Spots &nbsp; &nbsp;</td>
+                <td>{{ journey.spots }}</td>
+            </tr>
+         </table>
+
+             <alert ng-repeat="alert in alerts | filter: {id:journey.id}" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 </div>
 
+ <div class="col-md-4 col-xs-6">
+        <button class= "attend" ng-click="attendJourney(journey);">Attend Journey</button>
+</div>
+</row>
+</div>
+<br>
+
+</container>

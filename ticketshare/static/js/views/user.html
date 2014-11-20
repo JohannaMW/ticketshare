@@ -1,75 +1,169 @@
-<h1>Hello {{ user.first_name }}</h1>
+  <style type="text/css">
+     .button { margin-top: 5px;}
+     .journey_title {font-family: 'Open Sans Condensed', sans-serif;}
+      container {font-family: 'Open Sans Condensed', sans-serif;}
+    </style>
 
-<h3>Your Credentials</h3>
-<p>
-    Username: {{ user.username }}<br>
-    First Name: {{ user.first_name }}<br>
-    Last Name: {{ user.last_name }}<br>
-    Mobile: {{ user.mobile }}
-</p>
+  <container>
+      <row>
+          <div class="col-md-12">
+            <b><h3 class="journey_title">Hello {{ user.first_name }}</h3></b>
+          </div>
+      </row>
 
-<button ng-click="deleteUser(user);">Delete Profile</button>
-<button ng-click="editU();">Edit Profile</button>
+      <row>
+    <div class="col-md-12 col-xs-18">
+       <button ng-click="creating();">Going on a Journey?</button>
+        </div>
+</row>
+      <div ng-show="create">
+    <b><h3>Create a Journey</h3></b>
+    <span class="input-group">
+              When? <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </span>
+    From Where? <input class="form-control" ng-model="journeyDepart">
+    To Where? <input class="form-control" ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
+    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
+    Description (optional) <input class="form-control" type="text" ng-model="journeyDescription">
+    <button ng-click="createJourney();">Create</button>
+</div>
+<row>
+     <div class="col-md-8 col-xs-12">
+         <br>
+         <br>
+    <table class="journey_description">
+            <tr>
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td>First Name: &nbsp; &nbsp;</td>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Mobile &nbsp; &nbsp;</td>
+                <td>{{ user.mobile }}</td>
+            </tr>
+         </table>
+         </div>
+
+    <div class="col-md-4 col-xs-6">
+        <br>
+        <br>
+<button class="button" ng-click="deleteUser(user);">Delete Profile</button><br>
+<button class="button" ng-click="editU();">Edit Profile</button>
+         </div>
+</row>
 
 <div ng-show="editingUser">
-    <h3>Update User</h3>
-    Username <input ng-model="newUsername">
-    First Name <input ng-model="newFirstName">
-    Last Name <input ng-model="newLastName">
-    Mobile <input ng-model="newMobile">
-    Please confirm your password <input type="password" ng-model="Password">
+   <b><h3 class="journey_title">Update User</h3></b>
+    Username <input class="form-control" ng-model="newUsername">
+    First Name <input class="form-control" ng-model="newFirstName">
+    Last Name <input class="form-control" ng-model="newLastName">
+    Mobile <input class="form-control" ng-model="newMobile">
+    Please confirm your password <input class="form-control" type="password" ng-model="Password">
     <button ng-click="editUser(user);">Edit</button>
 </div>
 
-<h3>Journeys you are attending</h3>
+<row>
+    <div class="col-md-12 col-xs-18">
+       <b><h3 class="journey_title">Journeys you are attending</h3></b>
+    </div>
+</row>
+
+<row>
 <div ng-repeat="journey in user.journey_attend track by $index">
-    <h4>From {{ journey.depart }} to {{ journey.arrive }}</h4>
-<p>
-    From: {{ journey.depart }}<br>
-    To: {{ journey.arrive }}<br>
-    When: {{ journey.date }}<br>
-    Meeting Point: {{ journey.meeting_point }}<br>
-    Host: {{ journey.host }}
-</p>
+     <div class="col-md-8 col-xs-12">
+    <h4 class="journey_title">From {{ journey.depart }} to {{ journey.arrive }}</h4>
+    <table class="journey_description">
+            <tr>
+                <td>With</td>
+                <td>{{ journey.host.username }}</td>
+            </tr>
+            <tr>
+                <td>When</td>
+                <td>{{ journey.date }}</td>
+            </tr>
+            <tr>
+                <td>More Info</td>
+                <td>{{ journey.description }}</td>
+            </tr>
+            <tr>
+                <td>Mobile Number Host &nbsp; &nbsp;</td>
+                <td>{{ journey.host.mobile }}</td>
+            </tr>
+              <tr>
+                <td>Mobile Number EMail &nbsp; &nbsp;</td>
+                <td>{{ journey.host.email }}</td>
+            </tr>
+         </table>
+         </div>
+      <div class="col-md-4 col-xs-6">
+        <button>Actually I want to stay at home.</button>
+    </div>
+    </div>
 
-</div>
+    </row>
+<row>
+    <div class="col-md-12 col-xs-18">
+        <b><h3 class="journey_title">Journeys you are hosting</h3></b>
+        </div>
 
-<h3>Journeys you are hosting</h3>
+</row>
+
+      <row>
+
 <div ng-repeat="journey in user.journey_host track by $index">
-    <h4>From {{ journey.depart }} to {{ journey.arrive }}</h4>
-<p>
-    From: {{ journey.depart }}<br>
-    To: {{ journey.arrive }}<br>
-    When: {{ journey.date }}<br>
-    Meeting Point: {{ journey.meeting_point }}<br>
-    Host: {{ journey.host }}
-</p>
-<div ng-show="editingJourney">
-    <h3>Update Journey</h3>
-    When? <input type="datetime" ng-model="journeyDate">
-    From Where? <input ng-model="journeyDepart">
-    To Where? <input ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
-    How many spots are available? <input type="number" ng-model="journeySpots">
-    Description (optional) <input type="number" ng-model="journeyDescription">
-    <button ng-click="editJourney(journey);">Edit</button>
-</div>
+    <div class="col-md-8 col-xs-12">
+    <h4 class="journey_title">From {{ journey.depart }} to {{ journey.arrive }}</h4>
+    <table class="journey_description">
+            <tr>
+                <td>From</td>
+                <td>{{ journey.depart }}</td>
+            </tr>
+            <tr>
+                <td>To</td>
+                <td>{{ journey.arrive }}</td>
+            </tr>
+            <tr>
+                <td>When</td>
+                <td>{{ journey.date }}</td>
+            </tr>
+            <tr>
+                <td>Meeting Point &nbsp; &nbsp;</td>
+                <td>{{ journey.meeting_point }}</td>
+            </tr>
 
+         </table>
+
+         </div>
+ <div class="col-md-4 col-xs-6">
 <button ng-click="deleteJourney(journey);">Delete Journey</button>
 <button ng-click="editingJ();">Edit Journey</button>
 </div>
-
-    <button ng-click="creating();">Going on a Journey?</button>
-
-<div ng-show="create">
-    <h3>Create a Journey</h3>
-    When? <input type="datetime" ng-model="journeyDate">
-    From Where? <input ng-model="journeyDepart">
-    To Where? <input ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input ng-model="journeyMeetingPoint">
-    How many spots are available? <input type="number" ng-model="journeySpots">
-    Description (optional) <input type="number" ng-model="journeyDescription">
-    <button ng-click="createJourney();">Create</button>
+    </div>
+  </row>
+<row>
+     <div class="col-md-12 col-xs-18">
+<div ng-show="editingJourney">
+    <h3>Update Journey</h3>
+    When? <input class="form-control" type="datetime" ng-model="journeyDate">
+    From Where? <input class="form-control" ng-model="journeyDepart">
+    To Where? <input class="form-control" ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
+    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
+    Description (optional) <input class="form-control" type="number" ng-model="journeyDescription">
+    <button type="submit" ng-click="editJourney(journey);">Edit</button>
 </div>
+         </div>
+</row>
 
-</div>
+</container>
