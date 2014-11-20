@@ -24,12 +24,13 @@
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </span>
-    From Where? <input class="form-control" ng-model="journeyDepart">
-    To Where? <input class="form-control" ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
-    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
-    Description (optional) <input class="form-control" type="text" ng-model="journeyDescription">
-    <button ng-click="createJourney();">Create</button>
+    From Where? <input placeholder="Berlin" class="form-control" ng-model="journeyDepart">
+    To Where? <input placeholder="Hamburg" class="form-control" ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input placeholder="Main Station" class="form-control" ng-model="journeyMeetingPoint">
+    How many spots are available? <input placeholder="3" class="form-control" type="number" ng-model="journeySpots">
+    Description (optional) <input placeholder="Come with me!" class="form-control" type="text" ng-model="journeyDescription">
+
+    <button style="margin-top: 5px;" ng-click="createJourney();">Create</button>
 </div>
 <row>
      <div class="col-md-8 col-xs-12">
@@ -59,30 +60,29 @@
         <br>
         <br>
 <button class="button" ng-click="deleteUser(user);">Delete Profile</button><br>
-<button class="button" ng-click="editU();">Edit Profile</button>
+<button style="margin-bottom: 5px;" class="button" ng-click="editU();">Edit Profile</button>
          </div>
 </row>
 
 <div ng-show="editingUser">
    <b><h3 class="journey_title">Update User</h3></b>
-    Username <input class="form-control" ng-model="newUsername">
-    First Name <input class="form-control" ng-model="newFirstName">
-    Last Name <input class="form-control" ng-model="newLastName">
-    Mobile <input class="form-control" ng-model="newMobile">
+    Username <input placeholder="Max" class="form-control" ng-model="newUsername">
+    First Name <input placeholder="Max" class="form-control" ng-model="newFirstName">
+    Last Name <input placeholder="Mustermann" class="form-control" ng-model="newLastName">
+    Mobile <input placeholder="415-777-1011" class="form-control" ng-model="newMobile">
     Please confirm your password <input class="form-control" type="password" ng-model="Password">
-    <button ng-click="editUser(user);">Edit</button>
+    <button style="margin-top: 5px;" ng-click="editUser(user);">Edit</button>
 </div>
 
-<row>
-    <div class="col-md-12 col-xs-18">
-       <b><h3 class="journey_title">Journeys you are attending</h3></b>
-    </div>
-</row>
+
 
 <row>
+
+
+
 <div ng-repeat="journey in user.journey_attend track by $index">
      <div class="col-md-8 col-xs-12">
-    <h4 class="journey_title">From {{ journey.depart }} to {{ journey.arrive }}</h4>
+    <h4 class="journey_title">You are travelling from {{ journey.depart }} to {{ journey.arrive }}</h4>
     <table class="journey_description">
             <tr>
                 <td>With</td>
@@ -112,18 +112,12 @@
     </div>
 
     </row>
-<row>
-    <div class="col-md-12 col-xs-18">
-        <b><h3 class="journey_title">Journeys you are hosting</h3></b>
-        </div>
-
-</row>
 
       <row>
 
 <div ng-repeat="journey in user.journey_host track by $index">
     <div class="col-md-8 col-xs-12">
-    <h4 class="journey_title">From {{ journey.depart }} to {{ journey.arrive }}</h4>
+    <h4 class="journey_title">You are hosting a journey from {{ journey.depart }} to {{ journey.arrive }}</h4>
     <table class="journey_description">
             <tr>
                 <td>From</td>
@@ -146,22 +140,23 @@
 
          </div>
  <div class="col-md-4 col-xs-6">
-<button ng-click="deleteJourney(journey);">Delete Journey</button>
-<button ng-click="editingJ();">Edit Journey</button>
+<button ng-click="deleteJourney(journey);" style="margin-bottom: 5px;">Delete Journey</button>
+<button ng-click="editingJ();" style="margin-bottom: 5px;">Edit Journey</button>
 </div>
-    </div>
-  </row>
+</div>
+</row>
+
 <row>
      <div class="col-md-12 col-xs-18">
 <div ng-show="editingJourney">
     <h3>Update Journey</h3>
     When? <input class="form-control" type="datetime" ng-model="journeyDate">
-    From Where? <input class="form-control" ng-model="journeyDepart">
-    To Where? <input class="form-control" ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
-    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
-    Description (optional) <input class="form-control" type="number" ng-model="journeyDescription">
-    <button type="submit" ng-click="editJourney(journey);">Edit</button>
+    From Where? <input placeholder="San Francisco" class="form-control" ng-model="journeyDepart">
+    To Where? <input placeholder="Los Angeles" class="form-control" ng-model="journeyArrive">
+    Where do you want to meet your fellow Passengers <input placeholder="Civic Center" class="form-control" ng-model="journeyMeetingPoint">
+    How many spots are available? <input placeholder="2" class="form-control" type="number" ng-model="journeySpots">
+    Description (optional) <input placeholder="Join me!" class="form-control" type="number" ng-model="journeyDescription">
+    <button style="margin-top: 5px;" type="submit" ng-click="editJourney(journey);">Edit</button>
 </div>
          </div>
 </row>
