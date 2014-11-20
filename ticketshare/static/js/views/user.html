@@ -1,25 +1,24 @@
   <style type="text/css">
      .button { margin-top: 5px;}
-     .journey_title {font-family: 'Open Sans Condensed', sans-serif;}
+     .journey_title {font-family: 'Open Sans Condensed', sans-serif; text-decoration: underline;}
       container {font-family: 'Open Sans Condensed', sans-serif;}
     </style>
 
   <container>
       <row>
           <div class="col-md-12">
-            <b><h3 class="journey_title">Hello {{ user.first_name }}</h3></b>
+            <b><h3>Hello {{ user.first_name }}</h3></b>
           </div>
       </row>
 
       <row>
     <div class="col-md-12 col-xs-18">
-       <button ng-click="creating();">Going on a Journey?</button>
+       <button style="margin-bottom: 5px;" ng-click="creating();">Going on a Journey?</button>
         </div>
 </row>
       <div ng-show="create">
-    <b><h3>Create a Journey</h3></b>
     <span class="input-group">
-              When? <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <input placeholder="When?" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
