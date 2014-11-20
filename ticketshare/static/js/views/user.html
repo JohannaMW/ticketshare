@@ -24,11 +24,11 @@
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </span>
-    From Where? <input placeholder="Berlin" class="form-control" ng-model="journeyDepart">
-    To Where? <input placeholder="Hamburg" class="form-control" ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input placeholder="Main Station" class="form-control" ng-model="journeyMeetingPoint">
-    How many spots are available? <input placeholder="3" class="form-control" type="number" ng-model="journeySpots">
-    Description (optional) <input placeholder="Come with me!" class="form-control" type="text" ng-model="journeyDescription">
+    <input placeholder="From where?" class="form-control" ng-model="journeyDepart">
+    <input placeholder="To where" class="form-control" ng-model="journeyArrive">
+    <input placeholder="Where do you want to meet your fellow Passengers" class="form-control" ng-model="journeyMeetingPoint">
+    <input placeholder="How many spots are available?" class="form-control" type="number" ng-model="journeySpots">
+    <input placeholder="Description (optional)" class="form-control" type="text" ng-model="journeyDescription">
 
     <button style="margin-top: 5px;" ng-click="createJourney();">Create</button>
 </div>
@@ -65,11 +65,11 @@
 </row>
 
 <div ng-show="editingUser">
-    Username <input placeholder="Max" class="form-control" ng-model="newUsername">
-    First Name <input placeholder="Max" class="form-control" ng-model="newFirstName">
-    Last Name <input placeholder="Mustermann" class="form-control" ng-model="newLastName">
-    Mobile <input placeholder="415-777-1011" class="form-control" ng-model="newMobile">
-    Please confirm your password <input class="form-control" type="password" ng-model="Password">
+   <input placeholder="Username" class="form-control" ng-model="newUsername">
+   <input placeholder="First Name " class="form-control" ng-model="newFirstName">
+   <input placeholder="Last Name" class="form-control" ng-model="newLastName">
+   <input placeholder="Mobile" class="form-control" ng-model="newMobile">
+   <input placeholder="Please confirm changes by entering your password" class="form-control" type="password" ng-model="Password">
     <button style="margin-top: 5px;" ng-click="editUser(user);">Edit</button>
 </div>
 
@@ -150,11 +150,11 @@
 <div ng-show="editingJourney">
 
     <input class="form-control" type="datetime" ng-model="journeyDate">
-    From Where? <input placeholder="San Francisco" class="form-control" ng-model="journeyDepart">
-    To Where? <input placeholder="Los Angeles" class="form-control" ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input placeholder="Civic Center" class="form-control" ng-model="journeyMeetingPoint">
-    How many spots are available? <input placeholder="2" class="form-control" type="number" ng-model="journeySpots">
-    Description (optional) <input placeholder="Join me!" class="form-control" type="number" ng-model="journeyDescription">
+    <input placeholder="From Where?" class="form-control" ng-model="journeyDepart">
+    <input placeholder="To Where?" class="form-control" ng-model="journeyArrive">
+    <input placeholder="Where do you want to meet your fellow Passengers " class="form-control" ng-model="journeyMeetingPoint">
+    <input placeholder="How many spots are available? " class="form-control" type="number" ng-model="journeySpots">
+    <input placeholder="Description (optional)" class="form-control" type="number" ng-model="journeyDescription">
     <button style="margin-top: 5px;" type="submit" ng-click="editJourney(journey);">Edit</button>
 </div>
          </div>

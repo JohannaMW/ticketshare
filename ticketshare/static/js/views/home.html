@@ -28,11 +28,11 @@
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </span>
-    From Where? <input class="form-control" ng-model="journeyDepart">
-    To Where? <input class="form-control" ng-model="journeyArrive">
-    Where do you want to meet your fellow Passengers <input class="form-control" ng-model="journeyMeetingPoint">
-    How many spots are available? <input class="form-control" type="number" ng-model="journeySpots">
-    Description (optional) <input class="form-control" type="text" ng-model="journeyDescription">
+    <input placeholder="From Where? " class="form-control" ng-model="journeyDepart">
+    <input placeholder="To Where?" class="form-control" ng-model="journeyArrive">
+    <input placeholder=" Where do you want to meet your fellow Passengers" class="form-control" ng-model="journeyMeetingPoint">
+    <input placeholder="How many spots are available?" class="form-control" type="number" ng-model="journeySpots">
+    <input placeholder="Description (optional)" class="form-control" type="text" ng-model="journeyDescription">
     <button style="margin-top: 5px;" ng-click="createJourney();">Create</button>
 </div>
 </row>
