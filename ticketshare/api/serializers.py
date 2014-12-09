@@ -21,4 +21,4 @@ class JourneySerializer(serializers.ModelSerializer):
     host = UserSerializer()
     class Meta:
         model = Journey
-        #read_only_fields = ('host',)
+        read_only_fields = ('host',)

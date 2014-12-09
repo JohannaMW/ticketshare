@@ -3,6 +3,7 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
     $scope.editingUser = false;
     $scope.editingUser = false;
     $scope.create = false;
+    var currentJourney;
 
     UserFactory.getUser(userId, function (response) {
             console.log(response);
@@ -25,7 +26,7 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
         };
       console.log(user);
       UserFactory.editUser(user, data, function(response) {
-           $location.path('/users/' + userId + '')
+           $location.path('/user/' + userId + '')
       });
     };
 
@@ -76,7 +77,7 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
         });
     };
 
-    $scope.editJourney = function(journey) {
+    $scope.editJourney = function() {
         var data = {
             "date": $scope.journeyDate,
             "depart": $scope.journeyDepart,
@@ -85,12 +86,24 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
             "spots": $scope.journeySpots,
             "description" : $scope.journeyDescription
         };
-      JourneyFactory.editJourney(journey,data, function(response) {
-           $location.path('/journeys/' + journeyId + '')
+      JourneyFactory.editJourney(currentJourney, data, function(response) {
+           $location.path('/journeys/' + currentJourney.id + '')
       });
     };
 
-    $scope.editingJ = function (event) {
+    $scope.cancelJourney = function(journey) {
+        $http.post('/journeys/' + journey.id + '/cancel_attendance/').
+            success(function(data){
+                $location.path('/')
+
+        }).error(function(data) {
+            console.log("didn't work");
+        });
+    };
+
+    $scope.editingJ = function (journey) {
         $scope.editingJourney = true;
+        currentJourney = journey;
+        console.log("current:" + currentJourney)
     }
 }

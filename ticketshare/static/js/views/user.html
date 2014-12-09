@@ -16,13 +16,7 @@
        <button style="margin-bottom: 5px;" ng-click="creating();">Going on a Journey?</button>
         </div>
 </row>
-      <div ng-show="create">
-    <span class="input-group">
-              <input placeholder="When?" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </span>
+    <input placeholder="When?" class="form-control" ng-model="journeyDate">
     <input placeholder="From where?" class="form-control" ng-model="journeyDepart">
     <input placeholder="To where" class="form-control" ng-model="journeyArrive">
     <input placeholder="Where do you want to meet your fellow Passengers" class="form-control" ng-model="journeyMeetingPoint">
@@ -75,9 +69,6 @@
 
 
 <row>
-
-
-
 <div ng-repeat="journey in user.journey_attend track by $index">
      <div class="col-md-8 col-xs-12">
     <h4 class="journey_title">You are travelling from {{ journey.depart }} to {{ journey.arrive }}</h4>
@@ -105,13 +96,13 @@
          </table>
          </div>
       <div class="col-md-4 col-xs-6">
-        <button>Actually I want to stay at home.</button>
+        <button ng-click="cancelJourney(journey)">Actually I want to stay at home.</button>
     </div>
     </div>
 
     </row>
 
-      <row>
+     <row>
 
 <div ng-repeat="journey in user.journey_host track by $index">
     <div class="col-md-8 col-xs-12">
@@ -139,24 +130,27 @@
          </div>
  <div class="col-md-4 col-xs-6">
 <button  ng-click="deleteJourney(journey);" style="margin-bottom: 10px; margin-top: 10px;">Delete Journey</button>
-<button ng-click="editingJ();" style="margin-bottom: 5px;">Edit Journey</button>
+<button ng-click="editingJ(journey);" style="margin-bottom: 5px;">Edit Journey</button>
 </div>
-</div>
+
+          </div>
+
 </row>
 
 <row>
      <div class="col-md-12 col-xs-18">
 <div ng-show="editingJourney">
-
     <input placeholder="When?" class="form-control" type="datetime" ng-model="journeyDate">
     <input placeholder="From Where?" class="form-control" ng-model="journeyDepart">
     <input placeholder="To Where?" class="form-control" ng-model="journeyArrive">
     <input placeholder="Where do you want to meet your fellow Passengers " class="form-control" ng-model="journeyMeetingPoint">
     <input placeholder="How many spots are available? " class="form-control" type="number" ng-model="journeySpots">
-    <input placeholder="Description (optional)" class="form-control" type="number" ng-model="journeyDescription">
+    <input placeholder="Description (optional)" class="form-control" ng-model="journeyDescription">
     <button style="margin-top: 5px;" type="submit" ng-click="editJourney(journey);">Edit</button>
 </div>
          </div>
+
+
 </row>
 
 </container>

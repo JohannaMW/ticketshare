@@ -1,8 +1,0 @@
----
-
-virtualenv_path: "/home/ubuntu/.virtualenvs/ticketshare"
-
-git_repo: https://github.com/JohannaMW/ticketshare.git
-project_name: ticket
-project_path: "/home/ubuntu/{{ project_name }}"
-requirements_file: "{{ project_path }}/requirements.txt"

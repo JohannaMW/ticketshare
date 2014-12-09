@@ -51,5 +51,9 @@ class JourneyViewSet(viewsets.ModelViewSet):
         journey.attendee.add(attendee_id)
         return Response(status=status.HTTP_200_OK)
 
-
-
+    @detail_route(methods=['post'])
+    def cancel_attendance(self, request, pk):
+        journey = Journey.objects.get(pk=pk)
+        attendee_id = request.user.id
+        journey.attendee.remove(attendee_id)
+        return Response(status=status.HTTP_200_OK)
