@@ -10,7 +10,7 @@ router.register(r'users', UserViewSet, base_name='users')
 router.register(r'journeys', JourneyViewSet, base_name='journeys')
 
 urlpatterns = patterns('',
-    url(r'^home/$', 'ticketshare.views.home', name='home'),
+    url(r'^$', 'ticketshare.views.home', name='home'),
     url(r'^map/$', TemplateView.as_view(template_name="map.html"), name="map"),
 
     # JS Calls
