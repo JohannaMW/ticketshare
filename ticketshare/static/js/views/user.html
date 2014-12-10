@@ -16,6 +16,7 @@
        <button style="margin-bottom: 5px;" ng-click="creating();">Going on a Journey?</button>
         </div>
 </row>
+      <div ng-show="create">
     <input placeholder="When?" class="form-control" ng-model="journeyDate">
     <input placeholder="From where?" class="form-control" ng-model="journeyDepart">
     <input placeholder="To where" class="form-control" ng-model="journeyArrive">
@@ -24,7 +25,7 @@
     <input placeholder="Description (optional)" class="form-control" type="text" ng-model="journeyDescription">
 
     <button style="margin-top: 5px;" ng-click="createJourney();">Create</button>
-</div>
+          </div>
 <row>
      <div class="col-md-8 col-xs-12">
          <br>

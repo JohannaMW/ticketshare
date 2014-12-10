@@ -1,7 +1,6 @@
 function userController($scope, $http, $routeParams, UserFactory, JourneyFactory, $location) {
     var userId = $routeParams.id;
     $scope.editingUser = false;
-    $scope.editingUser = false;
     $scope.create = false;
     var currentJourney;
 
@@ -31,8 +30,11 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
     };
 
     $scope.editU = function () {
-        console.log("edit klicked");
-        $scope.editingUser = true;
+      if ($scope.editingUser === true) {
+            $scope.editingUser = false;
+        } else {
+            $scope.editingUser = true
+        }
     };
 
     $http.get('/journeys/').
@@ -44,7 +46,12 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
         });
 
      $scope.creating = function () {
-        $scope.create = true;
+        if ($scope.create === true) {
+            $scope.create = false;
+        } else {
+            $scope.create = true
+        }
+
     };
 
     $scope.createJourney = function () {
@@ -102,8 +109,11 @@ function userController($scope, $http, $routeParams, UserFactory, JourneyFactory
     };
 
     $scope.editingJ = function (journey) {
-        $scope.editingJourney = true;
         currentJourney = journey;
-        console.log("current:" + currentJourney)
+          if ($scope.editingJourney === true) {
+            $scope.editingJourney = false;
+        } else {
+            $scope.editingJourney = true
+        }
     }
 }
