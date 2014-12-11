@@ -49,7 +49,7 @@ $(document).ready(function() {
 
             var mapOptions = {
               center: loc,
-              zoom: 20,
+              zoom: 18,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
