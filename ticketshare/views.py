@@ -14,7 +14,7 @@ def set_position(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         print data
-        user = UserProfile.objects.get(username=request.username)
+        user = UserProfile.objects.get(username=request.user)
         print user
         user.long= data['long']
         user.lat = data['lat']
