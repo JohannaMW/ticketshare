@@ -17,7 +17,7 @@ function homeController($scope, $http, JourneyFactory, $location) {
 
     $scope.createJourney = function () {
         var data = {
-            "date": $scope.dt,
+            "date": $scope.journeyDate,
             "depart": $scope.journeyDepart,
             "arrive": $scope.journeyArrive,
             "meeting_point": $scope.journeyMeetingPoint,

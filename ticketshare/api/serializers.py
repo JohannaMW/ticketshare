@@ -18,7 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         return Journey.objects.filter(attendee=obj).values()
 
 class JourneySerializer(serializers.ModelSerializer):
-    host = UserSerializer()
+    host = UserSerializer(read_only=True)
     class Meta:
         model = Journey
-        #read_only_fields = ('host',)

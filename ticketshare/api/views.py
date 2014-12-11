@@ -28,13 +28,11 @@ class JourneyViewSet(viewsets.ModelViewSet):
    # permission_classes = (IsOwnerOrReadOnly,)
     queryset = Journey.objects.all()
     serializer_class = JourneySerializer
-    # one way to filter after username
-    filter_fields = ('host__username',)
+    #filter_fields = ('host__username',)
 
     @csrf_exempt
     def pre_save(self, obj):
         user = self.request.user
-        print user
         obj.host = user
 
     def get_queryset(self):
